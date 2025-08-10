@@ -1,0 +1,55 @@
+Spiegazione delle Modifiche e Considerazioni:
+
+initial_search_strings: Una lista di stringhe di ricerca predefinite per avviare il processo.
+
+base_scholar_url: L'URL base di Google Scholar, che verrà modificato dinamicamente con la query e i parametri start.
+
+processed_urls (Set globale): Un set viene utilizzato per tenere traccia di tutti gli URL che sono già stati o sono in fase di elaborazione. Questo previene chiamate ridondanti e cicli infiniti nel caso di link circolari tra le "related searches".
+
+all_extracted_result_links (Set globale): Raccoglie tutti i link dei risultati estratti da tutte le pagine, garantendo l'unicità.
+
+MAX_CONCURRENT_TASKS: Definisce il numero massimo di task asincrone che possono essere eseguite contemporaneamente. Questo è cruciale per la gestione delle risorse e per evitare di sovraccaricare il server.
+
+###
+
+extract_and_process_url Function:
+
+Questa è la funzione ricorsiva principale che gestisce il crawling a diversi livelli di profondità.
+
+Costruzione dell'URL: Modifica l'URL di base_scholar_url per includere search_string e il parametro start (0 o 10).
+
+Controllo processed_urls: Salta gli URL già visitati.
+
+Generazione Schema: Ho mantenuto la generazione dello schema all'interno di questa funzione. In un ambiente di produzione, se lo schema per Google Scholar è sempre lo stesso, si potrebbe generarlo una volta all'inizio e riutilizzarlo per tutte le chiamate.
+
+Estrazione Risultati: Dopo il crawling, verifica result.extracted_content (che dovrebbe contenere i link dei risultati grazie allo schema) e li aggiunge a all_extracted_result_links.
+
+Estrazione "Related Searches":
+
+Utilizza la funzione extract_related_searches per parsare il result.markdown.raw_markdown.
+
+Importante: Il CrawlerRunConfig è configurato per non applicare filtri al markdown_generator (se presente), assicurando che la sezione "Related searches" sia disponibile nel raw_markdown.
+
+Se vengono trovate ricerche correlate e la depth non ha superato max_depth, vengono create nuove task per esplorare questi URL, incrementando la profondità.
+
+###
+
+extract_related_searches Function:
+
+Una funzione helper che utilizza espressioni regolari per trovare la sezione "Related searches" nel markdown e estrarre gli URL e il testo corrispondente.
+
+run_tasks_with_concurrency_limit Function:
+
+Una funzione utility per gestire il MAX_CONCURRENT_TASKS utilizzando un asyncio.Semaphore. Questo assicura che non vengano avviate troppe richieste simultaneamente, rispettando i limiti del server e le risorse locali.
+
+###
+
+Logica di Ramificazione:
+
+Il depth parametro nella funzione extract_and_process_url traccia il livello attuale di ramificazione.
+
+max_depth (impostato a 3) ferma l'esplorazione quando si raggiunge il terzo livello.
+
+Il conteggio delle chiamate stimato 2m + 2nm + 2n²m (dove m è il numero di initial_search_strings e n il numero di "related searches") è gestito dall'iterazione e dalle chiamate ricorsive.
+
+Assenza di asyncio.sleep e User-Agent Rotator: Il prompt indica di pensarci "dopo". In un'implementazione reale per evitare il blocco IP, questi sarebbero essenziali.

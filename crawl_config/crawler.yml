@@ -1,0 +1,422 @@
+# crawler.yml - Configurazione Crawler per Crawl4AI
+# Questo file definisce come ogni operazione di crawl viene eseguita
+
+# Soglia minima di parole per considerare un blocco di contenuto
+word_count_threshold: 200
+# Opzioni: qualsiasi numero intero positivo
+# Default: 200
+# Funzionalità: Blocchi con meno parole vengono ignorati. Ridurre per siti con paragrafi corti
+
+# Strategia di estrazione strutturata
+extraction_strategy: null
+# Opzioni: null, JsonCssExtractionStrategy, LLMExtractionStrategy, etc.
+# Default: null
+# Funzionalità: Definisce come estrarre dati strutturati (JSON, CSS selectors, LLM)
+
+# Generatore di markdown personalizzato
+markdown_generator: null
+# Opzioni: null, DefaultMarkdownGenerator con opzioni personalizzate
+# Default: null
+# Funzionalità: Controlla la conversione HTML→Markdown
+
+# Modalità cache
+cache_mode: null
+# Opzioni: null, "ENABLED", "BYPASS", "DISABLED", "READ_ONLY", "WRITE_ONLY"
+# Default: null (usa comportamento di default)
+# Funzionalità: Controlla il comportamento della cache
+
+# Codice JavaScript da eseguire
+js_code: null
+# Opzioni: null, stringa o lista di stringhe JavaScript
+# Default: null
+# Funzionalità: Esegue JS personalizzato, utile per pulsanti "Carica altro" o interazioni
+
+# Condizione di attesa prima dell'estrazione
+wait_for: null
+# Opzioni: null, selettore CSS o espressione JS
+# Default: null
+# Funzionalità: Aspetta che un elemento sia presente prima di procedere
+# Esempi alternativi:
+# wait_for: "css:.main-loaded"
+# wait_for: "js:() => window.loaded === true"
+
+# Cattura screenshot
+screenshot: false
+# Opzioni: true, false
+# Default: false
+# Funzionalità: Cattura screenshot della pagina dopo il caricamento (base64)
+
+# Genera PDF
+pdf: false
+# Opzioni: true, false
+# Default: false
+# Funzionalità: Genera PDF della pagina dopo il caricamento
+
+# Cattura MHTML
+capture_mhtml: false
+# Opzioni: true, false
+# Default: false
+# Funzionalità: Cattura archivio MHTML completo della pagina
+
+# ==================== PARAMETRI DI LOCALIZZAZIONE ====================
+
+# Locale del browser
+locale: null
+# Opzioni: null, codici locale come "en-US", "it-IT", "fr-FR"
+# Default: null
+# Funzionalità: Imposta la lingua preferita del browser
+
+# Timezone del browser
+timezone_id: null
+# Opzioni: null, ID timezone come "Europe/Rome", "America/New_York"
+# Default: null
+# Funzionalità: Imposta il fuso orario del browser
+
+# Geolocalizzazione
+geolocation: null
+# Opzioni: null, oggetto GeolocationConfig con latitude/longitude
+# Default: null
+# Funzionalità: Simula posizione GPS specifica
+# Esempio alternativo:
+# geolocation:
+#   latitude: 41.9028
+#   longitude: 12.4964
+
+# ==================== GESTIONE RISORSE ====================
+
+# Abilita limitazione del rate
+enable_rate_limiting: false
+# Opzioni: true, false
+# Default: false
+# Funzionalità: Abilita controllo della velocità per batch processing
+
+# Configurazione limitazione rate
+rate_limit_config: null
+# Opzioni: null, oggetto RateLimitConfig
+# Default: null
+# Funzionalità: Configurazione dettagliata per rate limiting
+
+# Soglia percentuale memoria
+memory_threshold_percent: 70.0
+# Opzioni: qualsiasi numero decimale 0-100
+# Default: 70.0
+# Funzionalità: Soglia memoria oltre la quale il crawler rallenta/pausa
+
+# Intervallo controllo risorse
+check_interval: 1.0
+# Opzioni: qualsiasi numero decimale positivo (secondi)
+# Default: 1.0
+# Funzionalità: Frequenza controllo memoria e CPU
+
+# Massimo sessioni concorrenti
+max_session_permit: 20
+# Opzioni: qualsiasi numero intero positivo
+# Default: 20
+# Funzionalità: Limite sessioni crawl simultanee per evitare sovraccarico
+
+# Modalità visualizzazione progress
+display_mode: null
+# Opzioni: null, "DETAILED", "BRIEF"
+# Default: null
+# Funzionalità: Controlla quante informazioni vengono mostrate durante il crawl
+
+# Modalità verbose per logging dettagliato
+verbose: true
+# Opzioni: true, false
+# Default: true
+# Funzionalità: Abilita log runtime aggiuntivi
+
+# Modalità streaming per batch processing
+stream: false
+# Opzioni: true, false
+# Default: false
+# Funzionalità: Abilita streaming per arun_many(), utile per grandi batch
+
+# ==================== SELEZIONE E FILTRAGGIO CONTENUTO ====================
+
+# Selettore CSS per contenuto specifico
+css_selector: null
+# Opzioni: null o stringa selettore CSS
+# Default: null
+# Funzionalità: Mantiene solo la parte della pagina che corrisponde al selettore
+
+# Elementi target per estrazione
+target_elements: null
+# Opzioni: null o lista di selettori CSS
+# Default: null
+# Funzionalità: Lista di selettori per elementi su cui concentrarsi
+
+# Tag da escludere
+excluded_tags: null
+# Opzioni: null o lista di tag HTML
+# Default: null
+# Funzionalità: Rimuove interamente i tag specificati
+# Esempio: ["script", "style", "nav", "footer"]
+
+# Selettore per esclusioni
+excluded_selector: null
+# Opzioni: null o stringa selettore CSS
+# Default: null
+# Funzionalità: Esclude elementi che corrispondono al selettore
+# Esempio: "#ads, .tracker"
+
+# Solo testo
+only_text: false
+# Opzioni: true, false
+# Default: false
+# Funzionalità: Estrae solo contenuto testuale
+
+# Formatta HTML
+prettiify: false
+# Opzioni: true, false
+# Default: false
+# Funzionalità: Abbellisce l'HTML finale (più lento, solo estetico)
+
+# Mantieni attributi data
+keep_data_attributes: false
+# Opzioni: true, false
+# Default: false
+# Funzionalità: Preserva attributi data-* nell'HTML pulito
+
+# Rimuovi form
+remove_forms: false
+# Opzioni: true, false
+# Default: false
+# Funzionalità: Rimuove tutti gli elementi <form>
+
+# ==================== GESTIONE CACHE E SESSIONE ====================
+
+# ID sessione per riutilizzo browser
+session_id: null
+# Opzioni: null o stringa ID
+# Default: null
+# Funzionalità: ID unico per riutilizzare una singola sessione browser
+
+# Bypassa cache (deprecato - usa cache_mode)
+bypass_cache: false
+# Opzioni: true, false
+# Default: false
+# Funzionalità: Come CacheMode.BYPASS
+
+# Disabilita cache (deprecato - usa cache_mode)
+disable_cache: false
+# Opzioni: true, false
+# Default: false
+# Funzionalità: Come CacheMode.DISABLED
+
+# Non leggere dalla cache
+no_cache_read: false
+# Opzioni: true, false
+# Default: false
+# Funzionalità: Come CacheMode.WRITE_ONLY
+
+# Non scrivere nella cache
+no_cache_write: false
+# Opzioni: true, false
+# Default: false
+# Funzionalità: Come CacheMode.READ_ONLY
+
+# ==================== PARAMETRI DI TIMEOUT E ATTESA ====================
+
+# Timeout pagina (millisecondi)
+page_timeout: 60000
+# Opzioni: qualsiasi numero intero positivo
+# Default: 60000 (60 secondi)
+# Funzionalità: Timeout massimo per il caricamento della pagina
+
+# Condizione di attesa per il caricamento
+wait_until: "networkidle"
+# Opzioni: "load", "domcontentloaded", "networkidle"
+# Default: "domcontentloaded"
+# Funzionalità: Quando considerare la pagina "caricata"
+
+# Aspetta caricamento immagini
+wait_for_images: true
+# Opzioni: true, false
+# Default: false
+# Funzionalità: Aspetta che le immagini si carichino completamente
+
+# Ritardo prima di catturare HTML
+delay_before_return_html: 0.5
+# Opzioni: qualsiasi numero decimale positivo (secondi)
+# Default: 0.1
+# Funzionalità: Pausa aggiuntiva prima della cattura finale dell'HTML
+
+# Controlla robots.txt
+check_robots_txt: false
+# Opzioni: true, false
+# Default: false
+# Funzionalità: Verifica e rispetta le regole robots.txt prima del crawling
+
+# Ritardo medio per batch
+mean_delay: 0.1
+# Opzioni: qualsiasi numero decimale positivo (secondi)
+# Default: 0.1
+# Funzionalità: Ritardo medio tra crawl in arun_many()
+
+# Range massimo ritardo
+max_range: 0.3
+# Opzioni: qualsiasi numero decimale positivo (secondi)
+# Default: 0.3
+# Funzionalità: Range massimo per ritardo casuale tra crawl
+
+# Conteggio semafori per concorrenza
+semaphore_count: 5
+# Opzioni: qualsiasi numero intero positivo
+# Default: 5
+# Funzionalità: Massima concorrenza per arun_many()
+
+# ==================== INTERAZIONE PAGINA ====================
+
+# Solo JavaScript (per sessioni esistenti)
+js_only: false
+# Opzioni: true, false
+# Default: false
+# Funzionalità: Indica riutilizzo sessione esistente con solo JS, senza reload
+
+# Ignora visibilità body
+ignore_body_visibility: true
+# Opzioni: true, false
+# Default: true
+# Funzionalità: Salta controllo visibilità <body>
+
+# Scansione pagina completa (scroll automatico)
+scan_full_page: false
+# Opzioni: true, false
+# Default: false
+# Funzionalità: Auto-scroll per caricare contenuto dinamico (infinite scroll)
+
+# Ritardo scroll
+scroll_delay: 0.2
+# Opzioni: qualsiasi numero decimale positivo (secondi)
+# Default: 0.2
+# Funzionalità: Ritardo tra passaggi di scroll se scan_full_page=True
+
+# Processa iframe
+process_iframes: false
+# Opzioni: true, false
+# Default: false
+# Funzionalità: Incorpora contenuto iframe per estrazione single-page
+
+# Rimuovi elementi overlay
+remove_overlay_elements: false
+# Opzioni: true, false
+# Default: false
+# Funzionalità: Rimuove modal/popup che bloccano contenuto principale
+
+# Simula utente
+simulate_user: false
+# Opzioni: true, false
+# Default: false
+# Funzionalità: Simula movimenti mouse per evitare rilevamento bot
+
+# Sovrascrivi navigator
+override_navigator: false
+# Opzioni: true, false
+# Default: false
+# Funzionalità: Sovrascrive proprietà navigator in JS per stealth
+
+# Modalità magic (sperimentale)
+magic: false
+# Opzioni: true, false
+# Default: false
+# Funzionalità: Gestione automatica popup/banner consenso
+
+# Adatta viewport al contenuto
+adjust_viewport_to_content: false
+# Opzioni: true, false
+# Default: false
+# Funzionalità: Ridimensiona viewport per matchare altezza contenuto
+
+# ==================== GESTIONE MEDIA ====================
+
+# Attesa per screenshot
+screenshot_wait_for: null
+# Opzioni: null o numero decimale (secondi)
+# Default: null
+# Funzionalità: Tempo attesa extra prima dello screenshot
+
+# Soglia altezza screenshot
+screenshot_height_threshold: 20000
+# Opzioni: qualsiasi numero intero positivo (pixel)
+# Default: 20000
+# Funzionalità: Se pagina più alta, usa strategie screenshot alternative
+
+# Soglia minima parole descrizione immagini
+image_description_min_word_threshold: 50
+# Opzioni: qualsiasi numero intero positivo
+# Default: 50
+# Funzionalità: Minimo parole per alt text/descrizione immagine valida
+
+# Soglia punteggio immagini
+image_score_threshold: 3
+# Opzioni: qualsiasi numero intero positivo
+# Default: 3
+# Funzionalità: Filtra immagini con punteggio basso (rilevanza)
+
+# Escludi immagini esterne
+exclude_external_images: false
+# Opzioni: true, false
+# Default: false
+# Funzionalità: Esclude immagini da altri domini
+
+# ==================== GESTIONE LINK E DOMINI ====================
+
+# Escludi domini social media
+exclude_social_media_domains: null
+# Opzioni: null o lista di domini
+# Default: null (usa lista predefinita Facebook/Twitter)
+# Funzionalità: Lista domini social da escludere dai link
+
+# Escludi link esterni
+exclude_external_links: false
+# Opzioni: true, false
+# Default: false
+# Funzionalità: Rimuove tutti i link che puntano fuori dal dominio corrente
+
+# Escludi link social media
+exclude_social_media_links: false
+# Opzioni: true, false
+# Default: false
+# Funzionalità: Rimuove link specifici a siti social
+
+# Domini da escludere
+exclude_domains: []
+# Opzioni: lista vuota o lista di stringhe domini
+# Default: []
+# Funzionalità: Lista personalizzata di domini da escludere
+
+# ==================== DEBUG E LOGGING ====================
+
+# Log console JavaScript
+log_console: false
+# Opzioni: true, false
+# Default: false
+# Funzionalità: Logga output console JavaScript della pagina
+
+# ==================== VIRTUAL SCROLL CONFIGURATION ====================
+
+# Configurazione scroll virtuale
+virtual_scroll_config: null
+# Opzioni: null, VirtualScrollConfig o dizionario
+# Default: null
+# Funzionalità: Per gestire scroll virtualizzato (Twitter/Instagram)
+# Esempio alternativo:
+# virtual_scroll_config:
+#   container_selector: "#timeline"
+#   scroll_count: 30
+#   scroll_by: "container_height"  # o "page_height" o numero pixel
+#   wait_after_scroll: 0.5
+
+# ==================== OPZIONI MARKDOWN GENERATOR ====================
+
+# Opzioni per generatore markdown
+markdown_generator_options: null
+# Opzioni: null o dizionario di opzioni
+# Default: null
+# Funzionalità: Opzioni avanzate per DefaultMarkdownGenerator
+# Esempio alternativo:
+# markdown_generator_options:
+#   content_source: "cleaned_html"  # "raw_html", "cleaned_html", "fit_html"
+#   ignore_links: false
+#   escape_special_chars: true

@@ -4,8 +4,9 @@ from crawl4ai import Crawler as Crawl4AICore
 class Crawler:
     """
     Classe wrapper per crawl4ai con possibilità di estendere e personalizzare comportamento.
+    Input: urls list, output directory an
     """
-    def __init__(self, urls: list[str] = None, output_dir: str = 'crawl_output'):
+    def __init__(self, urls: list[str] = None, output_dir: str = 'data/crawl_output'):
         self.urls = urls if urls else []
         self.output_dir = output_dir
         self.config_dict = {
@@ -59,5 +60,6 @@ class Crawler:
         crawler.config(self.config_dict)
         crawler.add_urls(self.urls)
         crawler.run()
+        #TODO: salvataggio su file?????
 
         return self.output_dir

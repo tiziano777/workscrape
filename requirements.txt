@@ -2,3 +2,5 @@ streamlit
 beautifulsoup4
 crawl4ai
 dotenv
+
+## DOCS: https://docs.crawl4ai.com/api/parameters/

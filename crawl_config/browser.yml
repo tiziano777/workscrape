@@ -1,0 +1,138 @@
+# browser.yml - Configurazione Browser per Crawl4AI
+# Questo file definisce come il browser viene avviato e si comporta durante il crawling
+
+# Tipo di browser da utilizzare
+browser_type: "chromium"
+# Opzioni: "chromium", "firefox", "webkit"
+# Default: "chromium"
+# Funzionalità: Specifica quale engine del browser utilizzare
+
+# Modalità headless (senza interfaccia grafica)
+headless: true
+# Opzioni: true, false
+# Default: true
+# Funzionalità: true = browser invisibile (più veloce), false = browser visibile (utile per debugging)
+
+# Configurazione proxy
+proxy_config: null
+# Opzioni: null o dizionario con campi proxy
+# Default: null
+# Funzionalità: Specifica le impostazioni proxy se necessario
+# Esempio alternativo:
+# proxy_config:
+#   server: "http://proxy-server:8080"
+#   username: "user"
+#   password: "pass"
+
+# Larghezza del viewport
+viewport_width: 1080
+# Opzioni: qualsiasi numero intero positivo
+# Default: 1080
+# Funzionalità: Imposta la larghezza iniziale della finestra del browser
+
+# Altezza del viewport
+viewport_height: 600
+# Opzioni: qualsiasi numero intero positivo
+# Default: 600
+# Funzionalità: Imposta l'altezza iniziale della finestra del browser
+
+# Modalità verbose per logging dettagliato
+verbose: true
+# Opzioni: true, false
+# Default: true
+# Funzionalità: Abilita log aggiuntivi utili per il debugging
+
+# Utilizzare un contesto persistente del browser
+use_persistent_context: false
+# Opzioni: true, false
+# Default: false
+# Funzionalità: Mantiene cookies e local storage tra le sessioni se true
+
+# Directory per i dati utente del browser
+user_data_dir: null
+# Opzioni: null o percorso stringa
+# Default: null
+# Funzionalità: Specifica dove salvare il profilo persistente del browser
+
+# Cookie iniziali da impostare
+cookies: null
+# Opzioni: null o lista di cookie
+# Default: null
+# Funzionalità: Imposta cookie specifici all'avvio
+# Esempio alternativo:
+# cookies:
+#   - name: "session"
+#     value: "abc123"
+#     domain: "example.com"
+
+# Header HTTP personalizzati
+headers: null
+# Opzioni: null o dizionario di header
+# Default: null
+# Funzionalità: Aggiunge header HTTP universali a tutte le richieste
+# Esempio alternativo:
+# headers:
+#   Accept-Language: "it-IT,it;q=0.9,en;q=0.8"
+#   Custom-Header: "value"
+
+# User Agent personalizzato
+user_agent: null
+# Opzioni: null, stringa personalizzata, o "random"
+# Default: null (usa default del browser)
+# Funzionalità: Imposta un User-Agent personalizzato o randomico
+
+# Modalità solo testo (disabilita immagini)
+text_mode: false
+# Opzioni: true, false
+# Default: false
+# Funzionalità: Disabilita il caricamento delle immagini per velocizzare il crawling di solo testo
+
+# Modalità leggera per prestazioni
+light_mode: false
+# Opzioni: true, false
+# Default: false
+# Funzionalità: Disattiva alcune funzionalità di background per migliorare le prestazioni
+
+# Argomenti aggiuntivi per il browser
+extra_args: null
+# Opzioni: null o lista di stringhe
+# Default: null
+# Funzionalità: Aggiunge flag aggiuntivi al browser sottostante
+# Esempio alternativo:
+# extra_args:
+#   - "--disable-extensions"
+#   - "--disable-gpu"
+#   - "--no-sandbox"
+
+# ==================== PARAMETRI AGGIUNTIVI ====================
+
+# Singolo proxy URL
+proxy: null
+# Opzioni: null o stringa URL
+# Default: null
+# Funzionalità: URL proxy singolo per tutto il traffico
+# Esempio: "http://user:pass@proxy:8080"
+
+# Ignora errori HTTPS
+ignore_https_errors: true
+# Opzioni: true, false
+# Default: true
+# Funzionalità: Continua nonostante certificati non validi (utile in dev/staging)
+
+# JavaScript abilitato
+java_script_enabled: true
+# Opzioni: true, false
+# Default: true
+# Funzionalità: Disabilita per ridurre overhead o per contenuto solo statico
+
+# Usa browser gestito per interazioni avanzate
+use_managed_browser: false
+# Opzioni: true, false
+# Default: false
+# Funzionalità: Per interazioni avanzate (debugging, uso CDP)
+
+# Modalità User Agent
+user_agent_mode: null
+# Opzioni: null, "random"
+# Default: null
+# Funzionalità: "random" per randomizzare lo User Agent automaticamente
