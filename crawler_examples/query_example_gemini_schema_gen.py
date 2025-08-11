@@ -37,7 +37,7 @@ async def main():
     extraction_strategy = JsonCssExtractionStrategy(schema=schema_definition)
 
 
-    # --- PASSO 4: Configura il crawler SENZA il Markdown generator che aplica filtri sul testo raw. troppo aggressivo per scraping links---
+    # --- PASSO 3: Configura il crawler SENZA il Markdown generator che aplica filtri sul testo raw. troppo aggressivo per scraping links---
     # rimossa completamente la configurazione del markdown_generator O rendila meno aggressiva
 
     config = CrawlerRunConfig(
@@ -52,7 +52,7 @@ async def main():
     #     extraction_strategy=extraction_strategy
     # )
 
-
+    ### PASSO 4: ESTRAZIONE DI INFO STRUTTURATE DALL' INPUT URL con crawler
     async with AsyncWebCrawler() as crawler:
         result = await crawler.arun(url, config=config)
 

@@ -1,0 +1,47 @@
+{
+  "title": "Arxiv Article Schema",
+  "description": "Schema per un documento di articolo Arxiv nel database MongoDB.",
+  "type": "object",
+  "required": ["id", "title", "published", "updated", "abstract", "authors"],
+
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "ID univoco dell'articolo Arxiv (URL). Questo sarà la chiave primaria."
+    },
+    "pdf_id": {
+    "type": "string",
+      "description": "ID univoco del PDF Arxiv ( PDF URL ). Questo sarà utile in fase sucxcessive per estrarre content."
+    },
+    "title": {
+      "type": "string",
+      "description": "Titolo completo dell'articolo."
+    },
+    "published": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data e ora di pubblicazione in formato ISO 8601."
+    },
+    "updated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data e ora dell'ultimo aggiornamento in formato ISO 8601."
+    },
+    "abstract": {
+      "type": "string",
+      "description": "Abstract dell'articolo."
+    },
+    "authors": {
+      "type": "array",
+      "description": "Lista degli autori dell'articolo.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "content": {
+      "type": "string",
+      "description": "Contenuto del file PDF"
+    },
+
+  }
+}

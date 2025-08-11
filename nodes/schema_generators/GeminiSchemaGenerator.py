@@ -9,7 +9,12 @@ from crawl4ai.extraction_strategy import JsonCssExtractionStrategy
 from crawl4ai import LLMConfig
 
 class LLMSchemaExtractor:
-    def __init__(self, schema_file: str = "data/schemas.jsonl", user_agents_file: str = "params/user_agent_params.json", additional_headers_path: str = "params/additional_headers.json" ):
+    '''
+    Estrae schema di estrazione struttutrata con chiamata LLM, restitutisce uno schema e lo salva in un file jsonl
+    La chiaamta viene effettuata alal pagina target per ottenere html,
+    i parametri della request sono passati dalla lettura di un file di configurazione json
+    '''
+    def __init__(self, provider: str = "gemini/gemini-1.5-flash-latest", schema_file: str = "data/schemas.jsonl", user_agents_file: str = "params/user_agent_params.json", additional_headers_path: str = "params/additional_headers.json" ):
         """
         Inizializza l'estrattore di schema.
         :param schema_file: percorso file JSONL dove salvare/leggere schemi.
@@ -19,6 +24,7 @@ class LLMSchemaExtractor:
         load_dotenv()
         self.api_token = os.getenv("GEMINI_API_KEY")
         self.schema_file = schema_file
+        self.provider = provider
     
         self.user_agents_file = user_agents_file
         self.additional_headers_path = additional_headers_path
@@ -111,7 +117,7 @@ class LLMSchemaExtractor:
         Usa JsonCssExtractionStrategy.generate_schema per generare lo schema da HTML.
         """
         llm_config = LLMConfig(
-            provider="gemini/gemini-1.5-flash-latest",  # Aggiornato per coerenza
+            provider=self.provider, 
             api_token=self.api_token
         )
         schema = JsonCssExtractionStrategy.generate_schema(html, llm_config=llm_config)
