@@ -38,7 +38,7 @@ class ArxivPreprocessor:
 
         return text
 
-    def __cal__(self, articles: List) -> List:
+    def __call__(self, articles: List) -> List:
         """
         Esegue il pre-processing completo di un singolo articolo.
 

@@ -1,6 +1,8 @@
 import requests
 import xml.etree.ElementTree as ET
 
+from state.arxivState import State
+
 # Definizione dei namespaces per il parsing XML
 # L'API di arXiv usa diversi namespace che sono essenziali per trovare i tag corretti
 namespaces = {
@@ -17,7 +19,7 @@ class ArxivApiClient:
         self.sort_by = sort_by
         self.sort_order = sort_order
 
-    def __call__(self, query):
+    def __call__(self, state: State) -> State:
         """
         Esegue una ricerca sull'API di arXiv e restituisce una lista di articoli.
 
@@ -30,7 +32,7 @@ class ArxivApiClient:
         
         # I parametri di ricerca dell'API
         params = {
-            'search_query': f"all:{query}",  # Ricerca in tutti i campi
+            'search_query': f"all:{state['query_string']}",  # Ricerca in tutti i campi
             'max_results': self.max_results,
             'sortBy': self.sort_by,
             'sortOrder': self.sort_order
@@ -46,19 +48,19 @@ class ArxivApiClient:
         # Parsing del feed XML
         root = ET.fromstring(response.content)
         
-        articles = []
         # I risultati di ricerca sono contenuti nei tag 'entry'
         for entry in root.findall('atom:entry', namespaces):
             # Estrazione dei dati
             article = {
                 'id': entry.find('atom:id', namespaces).text,
                 'pdf_id': entry.find('atom:id', namespaces).text.replace('abs','pdf'),
+                'html_id': entry.find('atom:id', namespaces).text.replace('abs','html'),
                 'title': entry.find('atom:title', namespaces).text.strip().replace('\n', ' '),
                 'published': entry.find('atom:published', namespaces).text,
                 'updated': entry.find('atom:updated', namespaces).text,
                 'abstract': entry.find('atom:summary', namespaces).text.strip().replace('\n', ' '),
                 'authors': [author.find('atom:name', namespaces).text for author in entry.findall('atom:author', namespaces)]
             }
-            articles.append(article)
+            state['articles'].append(article)
             
-        return articles
+        return state
