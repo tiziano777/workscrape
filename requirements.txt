@@ -2,7 +2,6 @@ streamlit
 beautifulsoup4
 crawl4ai
 dotenv
-pymongo
 sentence-transformers
 
 ## DOCS: https://docs.crawl4ai.com/api/parameters/

@@ -3,10 +3,6 @@
 TODO: this is only the scheletro preso da un altro prgetto!!
 
 '''
-
-
-
-
 import json
 import os
 import yaml
@@ -84,10 +80,6 @@ def run_pipeline(query, mistralConfig, geminiConfig, dbConfig):
     
     db_name=dbConfig['db_name']
     collection_name=dbConfig['db_collection']
-
-    @dataclass
-    class ContextSchema:
-        llm_provider: str = "openai"
 
     # Inizializza il modello LLM
     geminiLLM = ChatGoogleGenerativeAI(

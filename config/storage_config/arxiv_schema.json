@@ -41,7 +41,7 @@
     "content": {
       "type": "string",
       "description": "Contenuto del file PDF"
-    },
+    }
 
   }
 }

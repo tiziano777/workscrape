@@ -7,6 +7,9 @@ from urllib.parse import urlparse
 from dotenv import load_dotenv
 from crawl4ai.extraction_strategy import JsonCssExtractionStrategy
 from crawl4ai import LLMConfig
+from crawl4ai import AsyncWebCrawler, BrowserConfig, CrawlerRunConfig, CacheMode
+from crawl4ai.extraction_strategy import JsonCssExtractionStrategy
+
 
 class LLMSchemaExtractor:
     '''
@@ -14,7 +17,7 @@ class LLMSchemaExtractor:
     La chiaamta viene effettuata alal pagina target per ottenere html,
     i parametri della request sono passati dalla lettura di un file di configurazione json
     '''
-    def __init__(self, provider: str = "gemini/gemini-1.5-flash-latest", schema_file: str = "data/schemas.jsonl", user_agents_file: str = "params/user_agent_params.json", additional_headers_path: str = "params/additional_headers.json" ):
+    def __init__(self, provider: str = "gemini/gemini-2.0-flash-001", schema_file: str = "data/schemas.jsonl", user_agents_file: str = "params/user_agent_params.json", additional_headers_path: str = "params/additional_headers.json" ):
         """
         Inizializza l'estrattore di schema.
         :param schema_file: percorso file JSONL dove salvare/leggere schemi.
@@ -88,8 +91,6 @@ class LLMSchemaExtractor:
         if not os.path.isfile(self.schema_file):
             return None
 
-        parsed_url = urlparse(url)
-        target_domain = parsed_url.netloc
 
         with open(self.schema_file, "r", encoding="utf-8") as f:
             for line in f:
@@ -97,8 +98,8 @@ class LLMSchemaExtractor:
                     record = json.loads(line)
                     saved_url = record.get("url")
                     if saved_url:
-                        saved_domain = urlparse(saved_url).netloc
-                        if saved_domain == target_domain:
+                        
+                        if saved_url == url:
                             return record.get("schema")
                 except json.JSONDecodeError:
                     continue
