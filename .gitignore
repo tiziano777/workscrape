@@ -3,5 +3,5 @@
 .venv/
 crawler/__pycache__/
 utils/__pycache__/
-chromadb/
+chroma_db/
 langfuse/
