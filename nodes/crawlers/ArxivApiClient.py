@@ -1,7 +1,7 @@
 import requests
 import xml.etree.ElementTree as ET
 
-from state.arxivState import State
+from states.ArxivState import State
 
 # Definizione dei namespaces per il parsing XML
 # L'API di arXiv usa diversi namespace che sono essenziali per trovare i tag corretti

@@ -82,15 +82,33 @@ class LLMSchemaExtractor:
         response.raise_for_status()
         return response.text
     
+    def _extract_deepest_subdomain(self, url: str) -> Optional[str]:
+        """
+        Estrae il sottodominio più profondo dal percorso di un URL.
+        Ad esempio, 'http://arxiv.org/pdf/1234.5678' -> 'pdf'.
+        """
+        try:
+            parsed_url = urlparse(url)
+            # Ottiene il primo segmento del percorso, rimuovendo il '/' iniziale
+            subdomain = parsed_url.path.strip('/').split('/')[0]
+            if subdomain:
+                return subdomain
+        except:
+            return None
+        return None
+
     def load_schema_from_file(self, url: str) -> Optional[Dict]:
         """
-        Cerca nel file JSONL se esiste uno schema salvato per l'URL,
-        confrontando solo il dominio.
+        Cerca nel file JSONL se esiste uno schema salvato per un URL,
+        confrontando solo il sottodominio più profondo.
         Restituisce lo schema se trovato, altrimenti None.
         """
         if not os.path.isfile(self.schema_file):
             return None
 
+        input_subdomain = self._extract_deepest_subdomain(url)
+        if not input_subdomain:
+            return None
 
         with open(self.schema_file, "r", encoding="utf-8") as f:
             for line in f:
@@ -98,8 +116,9 @@ class LLMSchemaExtractor:
                     record = json.loads(line)
                     saved_url = record.get("url")
                     if saved_url:
-                        
-                        if saved_url == url:
+                        saved_subdomain = self._extract_deepest_subdomain(saved_url)
+                        # Confronta solo il sottodominio più profondo
+                        if saved_subdomain == input_subdomain:
                             return record.get("schema")
                 except json.JSONDecodeError:
                     continue

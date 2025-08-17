@@ -1,29 +1,35 @@
-from nodes.crawlers.ArxivApiClient import ArxivApiClient
-from nodes.crawlers.ArxivFetcher import ArxivFetcher
-from nodes.chunker.SectionChunker import SectionChunker
-from state.arxivState import State
+from states.ArxivState import State
+from pipelines.ArxivAbstractScraperPipeline import run_pipeline
 import asyncio
-import json
+import yaml
+import os
 
 async def main():
     query_string = "LLM"
-    arxiv = ArxivApiClient()
-    state= arxiv({"query_string": query_string, 'articles':[]})
-    first_article=state['articles'][0]['html_id']
-    print(first_article)
-    fetcher= ArxivFetcher()
-    first_article_text = await fetcher(first_article)
 
-    chunker= SectionChunker()
-    paper_dict_chunks= chunker(first_article_text)
+    MODEL_CONFIG = "./config/gemini2.0-flash.yml"
+    PROMPTS_PATH = "./config/prompts.yml"
+    DB_CONFIG = "./config/storage_config/abstracts_chromadb.yml"
 
-    print(paper_dict_chunks)
+    with open(MODEL_CONFIG, "r", encoding="utf-8") as f:
+        llmConfig = yaml.safe_load(f)
 
-    with open("chunks.json",mode="w") as f:
-        f.write(json.dumps(paper_dict_chunks))
+    api_key = os.environ.get("GEMINI_API_KEY")
+    llmConfig["gemini_api_key"] = api_key
+
+    with open(DB_CONFIG, "r", encoding="utf-8") as f:
+        dbConfig = yaml.safe_load(f)
+
+    with open(PROMPTS_PATH, "r", encoding="utf-8") as f:
+        prompts = yaml.safe_load(f)
+
+    run_pipeline(query_string, geminiConfig= llmConfig, dbConfig= dbConfig, prompts= prompts)
+    
+    
 
 
 
+    
 
 
 asyncio.run(main())

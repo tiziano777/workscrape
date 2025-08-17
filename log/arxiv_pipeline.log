@@ -1,0 +1,15 @@
+2025-08-17 19:01:07,991 [INFO] Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+2025-08-17 19:01:11,910 [INFO] Load pretrained SentenceTransformer: paraphrase-multilingual-mpnet-base-v2
+2025-08-17 19:34:51,786 [INFO] Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+2025-08-17 19:35:16,980 [INFO] Load pretrained SentenceTransformer: paraphrase-multilingual-mpnet-base-v2
+2025-08-17 19:35:21,375 [WARNING] Errore durante la generazione del grafo: [Errno 2] No such file or directory: 'images/gemini_api_llm_ner_pipeline.png'
+2025-08-17 19:42:01,248 [INFO] Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+2025-08-17 19:42:05,249 [INFO] Load pretrained SentenceTransformer: paraphrase-multilingual-mpnet-base-v2
+2025-08-17 19:42:09,529 [INFO] Salvata immagine del grafo in graph.png
+2025-08-17 19:43:53,701 [INFO] Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+2025-08-17 19:43:57,672 [INFO] Load pretrained SentenceTransformer: paraphrase-multilingual-mpnet-base-v2
+2025-08-17 19:44:00,656 [INFO] Salvata immagine del grafo in graph.png
+2025-08-17 19:52:28,252 [INFO] Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+2025-08-17 19:52:32,209 [INFO] Load pretrained SentenceTransformer: paraphrase-multilingual-mpnet-base-v2
+2025-08-17 19:52:35,385 [INFO] Salvata immagine del grafo in graph.png
+2025-08-17 19:52:35,391 [ERROR] Errore durante l'invocazione della pipeline al checkpoint LLM: 'State' object is not subscriptable

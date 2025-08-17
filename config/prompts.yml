@@ -1,0 +1,3 @@
+keyword_prompt: >
+  You are an expert at extracting keywords from scientific texts. Analyze the following abstract and return a list of the 5-8 most relevant keywords and topics. The output must be a JSON list of strings, return only the list of strings, with no additional text.
+  ABSTRACT:
