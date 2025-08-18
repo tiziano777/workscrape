@@ -47,8 +47,7 @@ PLANNING.md                      # Project planning overview
 ## 🛠️ Setup and Installation
 1. Prerequisites
 
-Python 3.10+
-Docker & Docker Compose (for Langfuse)
+Python 3.10+, Docker & Docker Compose (for Langfuse)
 
 2. Clone the Repository
 ```bash

@@ -1,7 +1,6 @@
 .env
 .continue/
 .venv/
-crawler/__pycache__/
-utils/__pycache__/
+__pycache__/
 chroma_db/
 langfuse/

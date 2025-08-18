@@ -19,7 +19,7 @@ class ArticleMetadata(BaseModel):
 class State(BaseModel):
     query_string: Optional[str] = Field(default=None, description="Testo di input")
     articles: Optional[List[ArticleMetadata]] = Field(default=[], description="Lista di articoli arxiv da query string api call")
-    error_status: Optional[str] = Field(default=None, description="Errori riscontrati (if any)")
+    error_status: Optional[List[str]] = Field(default=[], description="Errori riscontrati (if any)")
 
     
 

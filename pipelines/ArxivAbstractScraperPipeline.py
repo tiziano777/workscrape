@@ -12,6 +12,7 @@ from langgraph.graph import START, END, StateGraph
 from states.ArxivState import State
 from nodes.crawlers.ArxivApiClient import ArxivApiClient
 from nodes.preprocessors.GeminiKeywordExtractor import GeminiKeywordExtractor
+from nodes.preprocessors.ArxivPreprocessor import ArxivPreprocessor
 from nodes.storage.ChromaDB import ChromaDB
 
 # Langfuse classes
@@ -42,19 +43,22 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-def create_pipeline(arxixClient: ArxivApiClient, preprocessor: GeminiKeywordExtractor, writer: ChromaDB):
+def create_pipeline(arxixClient: ArxivApiClient, preprocessor1: ArxivPreprocessor, preprocessor2: GeminiKeywordExtractor, writer: ChromaDB):
     """
     Crea e compila la pipeline Langgraph.
     """
     workflow = StateGraph(State)
     workflow.add_node("arxiv_searcher", arxixClient)
     workflow.add_node("writer_node", writer)
-    workflow.add_node("preprocessor_node", preprocessor)
+    workflow.add_node("preprocessing_node", preprocessor1)
+    workflow.add_node("keyword_node", preprocessor2)
+    
 
     # Definizione del flusso di lavoro (edges)
     workflow.add_edge(START, "arxiv_searcher")
-    workflow.add_edge("arxiv_searcher", "preprocessor_node")
-    workflow.add_edge("preprocessor_node", "writer_node")
+    workflow.add_edge("arxiv_searcher", "preprocessing_node")
+    workflow.add_edge("preprocessing_node", "keyword_node")
+    workflow.add_edge("keyword_node", "writer_node")
     workflow.add_edge("writer_node", END)
 
     pipeline = workflow.compile()
@@ -91,11 +95,12 @@ def run_pipeline(query, geminiConfig, dbConfig, prompts):
 
     # Inizializzazione delle classi dei nodi
     arxivClient = ArxivApiClient(max_results=1)
-    preprocessor = GeminiKeywordExtractor(llm = geminiLLM, prompt=keyword_prompt)
+    preprocessor1 = GeminiKeywordExtractor(llm = geminiLLM, prompt=keyword_prompt)
+    preprocessor2 = ArxivPreprocessor()
     writer = ChromaDB(db_path,collection_name)
     
     # Crea la pipeline
-    graph = create_pipeline(arxivClient, preprocessor, writer)
+    graph = create_pipeline(arxivClient, preprocessor1, preprocessor2, writer)
 
     ### Langfuse ### 
     # `config={"callbacks": [langfuse_handler]}`
@@ -104,8 +109,8 @@ def run_pipeline(query, geminiConfig, dbConfig, prompts):
         # Invocazione della pipeline con tracciamento Langfuse
         state = graph.invoke({"query_string": query}, config={"callbacks": [langfuse_handler]})
 
-        error_status = state.get('error_status',None)
-        if error_status is not None:
+        error_status = state.get('error_status',[])
+        if error_status == []:
             logger.warning(f"Errore nello stato per query = {query} : {state['error_status']}")
             
         return state

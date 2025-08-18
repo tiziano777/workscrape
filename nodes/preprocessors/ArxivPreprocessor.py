@@ -1,6 +1,7 @@
 import re
 import unicodedata
 from typing import List, Dict
+from states.ArxivState import State
 
 class ArxivPreprocessor:
     """
@@ -36,7 +37,7 @@ class ArxivPreprocessor:
 
         return text
 
-    def __call__(self, articles: List) -> List:
+    def __call__(self, state: State) -> State:
         """
         Esegue il pre-processing completo di un singolo articolo.
 
@@ -46,19 +47,14 @@ class ArxivPreprocessor:
         Returns:
             List: I documenti puliti.
         """
-        for article in articles:
-            if 'content' not in article or not article['content']:
-                print(f"⚠️ Articolo '{article.get('id')}' saltato: manca il contenuto.")
-                return None
+        for article in state.articles:
+            if not article.abstract:
+                print(f"⚠️ Articolo '{article.id}' saltato: manca il contenuto.")
+                state.error_status.append(f"⚠️ Articolo '{article.id}' saltato")
+                continue
 
-            # Copia il documento per evitare di modificarlo direttamente
-            preprocessed_article = article.copy()
+            article.abstract = self._clean_text(article.abstract)
+            article.title = self._clean_text(article.title)
             
-            # Pulisci il testo principale
-            cleaned_text = self._clean_text(preprocessed_article['content'])
-            preprocessed_article['content_cleaned'] = cleaned_text
 
-            # Rimuove il campo 'content' originale per salvare solo il testo pulito
-            del preprocessed_article['content']
-
-        return preprocessed_article
+        return state

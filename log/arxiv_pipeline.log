@@ -658,3 +658,86 @@
 2025-08-18 12:17:46,849 [DEBUG] https://us.i.posthog.com:443 "POST /batch/ HTTP/1.1" 200 15
 2025-08-18 12:17:46,856 [DEBUG] Starting new HTTP connection (1): localhost:3000
 2025-08-18 12:17:46,920 [DEBUG] http://localhost:3000 "POST /api/public/otel/v1/traces HTTP/1.1" 200 381
+2025-08-18 15:05:20,960 [DEBUG] Using selector: EpollSelector
+2025-08-18 15:05:21,006 [INFO] Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+2025-08-18 15:05:21,078 [DEBUG] Starting component System
+2025-08-18 15:05:21,078 [DEBUG] Starting component Posthog
+2025-08-18 15:05:21,906 [DEBUG] Starting new HTTPS connection (1): us.i.posthog.com:443
+2025-08-18 15:05:22,352 [DEBUG] https://us.i.posthog.com:443 "POST /batch/ HTTP/1.1" 200 15
+2025-08-18 15:05:32,781 [INFO] Load pretrained SentenceTransformer: paraphrase-multilingual-mpnet-base-v2
+2025-08-18 15:05:32,787 [DEBUG] Starting new HTTPS connection (1): huggingface.co:443
+2025-08-18 15:05:32,958 [DEBUG] https://huggingface.co:443 "HEAD /sentence-transformers/paraphrase-multilingual-mpnet-base-v2/resolve/main/modules.json HTTP/1.1" 307 0
+2025-08-18 15:05:32,971 [DEBUG] https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-mpnet-base-v2/84fccfe766bcfd679e39efefe4ebf45af190ad2d/modules.json HTTP/1.1" 200 0
+2025-08-18 15:05:33,111 [DEBUG] https://huggingface.co:443 "HEAD /sentence-transformers/paraphrase-multilingual-mpnet-base-v2/resolve/main/config_sentence_transformers.json HTTP/1.1" 307 0
+2025-08-18 15:05:33,129 [DEBUG] https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-mpnet-base-v2/84fccfe766bcfd679e39efefe4ebf45af190ad2d/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-08-18 15:05:33,266 [DEBUG] https://huggingface.co:443 "HEAD /sentence-transformers/paraphrase-multilingual-mpnet-base-v2/resolve/main/config_sentence_transformers.json HTTP/1.1" 307 0
+2025-08-18 15:05:33,279 [DEBUG] https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-mpnet-base-v2/84fccfe766bcfd679e39efefe4ebf45af190ad2d/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-08-18 15:05:33,412 [DEBUG] https://huggingface.co:443 "HEAD /sentence-transformers/paraphrase-multilingual-mpnet-base-v2/resolve/main/README.md HTTP/1.1" 307 0
+2025-08-18 15:05:33,430 [DEBUG] https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-mpnet-base-v2/84fccfe766bcfd679e39efefe4ebf45af190ad2d/README.md HTTP/1.1" 200 0
+2025-08-18 15:05:33,560 [DEBUG] https://huggingface.co:443 "HEAD /sentence-transformers/paraphrase-multilingual-mpnet-base-v2/resolve/main/modules.json HTTP/1.1" 307 0
+2025-08-18 15:05:33,571 [DEBUG] https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-mpnet-base-v2/84fccfe766bcfd679e39efefe4ebf45af190ad2d/modules.json HTTP/1.1" 200 0
+2025-08-18 15:05:33,703 [DEBUG] https://huggingface.co:443 "HEAD /sentence-transformers/paraphrase-multilingual-mpnet-base-v2/resolve/main/sentence_bert_config.json HTTP/1.1" 307 0
+2025-08-18 15:05:33,715 [DEBUG] https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-mpnet-base-v2/84fccfe766bcfd679e39efefe4ebf45af190ad2d/sentence_bert_config.json HTTP/1.1" 200 0
+2025-08-18 15:05:33,860 [DEBUG] https://huggingface.co:443 "HEAD /sentence-transformers/paraphrase-multilingual-mpnet-base-v2/resolve/main/adapter_config.json HTTP/1.1" 404 0
+2025-08-18 15:05:33,996 [DEBUG] https://huggingface.co:443 "HEAD /sentence-transformers/paraphrase-multilingual-mpnet-base-v2/resolve/main/config.json HTTP/1.1" 307 0
+2025-08-18 15:05:34,011 [DEBUG] https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-mpnet-base-v2/84fccfe766bcfd679e39efefe4ebf45af190ad2d/config.json HTTP/1.1" 200 0
+2025-08-18 15:05:34,467 [DEBUG] https://huggingface.co:443 "HEAD /sentence-transformers/paraphrase-multilingual-mpnet-base-v2/resolve/main/tokenizer_config.json HTTP/1.1" 307 0
+2025-08-18 15:05:34,477 [DEBUG] https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-mpnet-base-v2/84fccfe766bcfd679e39efefe4ebf45af190ad2d/tokenizer_config.json HTTP/1.1" 200 0
+2025-08-18 15:05:34,613 [DEBUG] https://huggingface.co:443 "GET /api/models/sentence-transformers/paraphrase-multilingual-mpnet-base-v2/tree/main/additional_chat_templates?recursive=False&expand=False HTTP/1.1" 404 64
+2025-08-18 15:05:37,146 [DEBUG] https://huggingface.co:443 "HEAD /sentence-transformers/paraphrase-multilingual-mpnet-base-v2/resolve/main/1_Pooling/config.json HTTP/1.1" 307 0
+2025-08-18 15:05:37,161 [DEBUG] https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-mpnet-base-v2/84fccfe766bcfd679e39efefe4ebf45af190ad2d/1_Pooling%2Fconfig.json HTTP/1.1" 200 0
+2025-08-18 15:05:37,310 [DEBUG] https://huggingface.co:443 "GET /api/models/sentence-transformers/paraphrase-multilingual-mpnet-base-v2 HTTP/1.1" 200 6343
+2025-08-18 15:05:37,337 [DEBUG] Starting new HTTPS connection (1): mermaid.ink:443
+2025-08-18 15:05:37,660 [DEBUG] https://us.i.posthog.com:443 "POST /batch/ HTTP/1.1" 200 15
+2025-08-18 15:05:37,873 [DEBUG] https://mermaid.ink:443 "GET /img/LS0tCmNvbmZpZzoKICBmbG93Y2hhcnQ6CiAgICBjdXJ2ZTogbGluZWFyCi0tLQpncmFwaCBURDsKCV9fc3RhcnRfXyhbPHA+X19zdGFydF9fPC9wPl0pOjo6Zmlyc3QKCWFyeGl2X3NlYXJjaGVyKGFyeGl2X3NlYXJjaGVyKQoJd3JpdGVyX25vZGUod3JpdGVyX25vZGUpCglwcmVwcm9jZXNzaW5nX25vZGUocHJlcHJvY2Vzc2luZ19ub2RlKQoJa2V5d29yZF9ub2RlKGtleXdvcmRfbm9kZSkKCV9fZW5kX18oWzxwPl9fZW5kX188L3A+XSk6OjpsYXN0CglfX3N0YXJ0X18gLS0+IGFyeGl2X3NlYXJjaGVyOwoJYXJ4aXZfc2VhcmNoZXIgLS0+IHByZXByb2Nlc3Npbmdfbm9kZTsKCWtleXdvcmRfbm9kZSAtLT4gd3JpdGVyX25vZGU7CglwcmVwcm9jZXNzaW5nX25vZGUgLS0+IGtleXdvcmRfbm9kZTsKCXdyaXRlcl9ub2RlIC0tPiBfX2VuZF9fOwoJY2xhc3NEZWYgZGVmYXVsdCBmaWxsOiNmMmYwZmYsbGluZS1oZWlnaHQ6MS4yCgljbGFzc0RlZiBmaXJzdCBmaWxsLW9wYWNpdHk6MAoJY2xhc3NEZWYgbGFzdCBmaWxsOiNiZmI2ZmMK?type=png&bgColor=!white HTTP/1.1" 200 14784
+2025-08-18 15:05:37,884 [INFO] Salvata immagine del grafo in graph.png
+2025-08-18 15:05:37,896 [DEBUG] Starting new HTTP connection (1): export.arxiv.org:80
+2025-08-18 15:05:37,968 [DEBUG] http://export.arxiv.org:80 "GET /api/query?search_query=all%3ALLM&max_results=1&sortBy=submittedDate&sortOrder=descending HTTP/1.1" 301 0
+2025-08-18 15:05:37,971 [DEBUG] Starting new HTTPS connection (1): export.arxiv.org:443
+2025-08-18 15:05:38,245 [DEBUG] https://export.arxiv.org:443 "GET /api/query?search_query=all%3ALLM&max_results=1&sortBy=submittedDate&sortOrder=descending HTTP/1.1" 200 1421
+2025-08-18 15:05:39,401 [WARNING] Errore nello stato per query = LLM : []
+2025-08-18 15:05:39,665 [DEBUG] Starting new HTTPS connection (2): us.i.posthog.com:443
+2025-08-18 15:05:40,023 [DEBUG] https://us.i.posthog.com:443 "POST /batch/ HTTP/1.1" 200 15
+2025-08-18 15:05:40,029 [DEBUG] Starting new HTTP connection (1): localhost:3000
+2025-08-18 15:05:40,184 [DEBUG] http://localhost:3000 "POST /api/public/otel/v1/traces HTTP/1.1" 200 440
+2025-08-18 15:08:10,761 [DEBUG] Using selector: EpollSelector
+2025-08-18 15:08:10,790 [INFO] Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+2025-08-18 15:08:10,844 [DEBUG] Starting component System
+2025-08-18 15:08:10,844 [DEBUG] Starting component Posthog
+2025-08-18 15:08:11,392 [DEBUG] Starting new HTTPS connection (1): us.i.posthog.com:443
+2025-08-18 15:08:11,789 [DEBUG] https://us.i.posthog.com:443 "POST /batch/ HTTP/1.1" 200 15
+2025-08-18 15:08:15,013 [INFO] Load pretrained SentenceTransformer: paraphrase-multilingual-mpnet-base-v2
+2025-08-18 15:08:15,014 [DEBUG] Starting new HTTPS connection (1): huggingface.co:443
+2025-08-18 15:08:15,170 [DEBUG] https://huggingface.co:443 "HEAD /sentence-transformers/paraphrase-multilingual-mpnet-base-v2/resolve/main/modules.json HTTP/1.1" 307 0
+2025-08-18 15:08:15,183 [DEBUG] https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-mpnet-base-v2/84fccfe766bcfd679e39efefe4ebf45af190ad2d/modules.json HTTP/1.1" 200 0
+2025-08-18 15:08:15,427 [DEBUG] https://huggingface.co:443 "HEAD /sentence-transformers/paraphrase-multilingual-mpnet-base-v2/resolve/main/config_sentence_transformers.json HTTP/1.1" 307 0
+2025-08-18 15:08:15,439 [DEBUG] https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-mpnet-base-v2/84fccfe766bcfd679e39efefe4ebf45af190ad2d/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-08-18 15:08:15,572 [DEBUG] https://huggingface.co:443 "HEAD /sentence-transformers/paraphrase-multilingual-mpnet-base-v2/resolve/main/config_sentence_transformers.json HTTP/1.1" 307 0
+2025-08-18 15:08:15,583 [DEBUG] https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-mpnet-base-v2/84fccfe766bcfd679e39efefe4ebf45af190ad2d/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-08-18 15:08:15,714 [DEBUG] https://huggingface.co:443 "HEAD /sentence-transformers/paraphrase-multilingual-mpnet-base-v2/resolve/main/README.md HTTP/1.1" 307 0
+2025-08-18 15:08:15,725 [DEBUG] https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-mpnet-base-v2/84fccfe766bcfd679e39efefe4ebf45af190ad2d/README.md HTTP/1.1" 200 0
+2025-08-18 15:08:15,878 [DEBUG] https://huggingface.co:443 "HEAD /sentence-transformers/paraphrase-multilingual-mpnet-base-v2/resolve/main/modules.json HTTP/1.1" 307 0
+2025-08-18 15:08:15,893 [DEBUG] https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-mpnet-base-v2/84fccfe766bcfd679e39efefe4ebf45af190ad2d/modules.json HTTP/1.1" 200 0
+2025-08-18 15:08:16,024 [DEBUG] https://huggingface.co:443 "HEAD /sentence-transformers/paraphrase-multilingual-mpnet-base-v2/resolve/main/sentence_bert_config.json HTTP/1.1" 307 0
+2025-08-18 15:08:16,036 [DEBUG] https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-mpnet-base-v2/84fccfe766bcfd679e39efefe4ebf45af190ad2d/sentence_bert_config.json HTTP/1.1" 200 0
+2025-08-18 15:08:16,173 [DEBUG] https://huggingface.co:443 "HEAD /sentence-transformers/paraphrase-multilingual-mpnet-base-v2/resolve/main/adapter_config.json HTTP/1.1" 404 0
+2025-08-18 15:08:16,313 [DEBUG] https://huggingface.co:443 "HEAD /sentence-transformers/paraphrase-multilingual-mpnet-base-v2/resolve/main/config.json HTTP/1.1" 307 0
+2025-08-18 15:08:16,325 [DEBUG] https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-mpnet-base-v2/84fccfe766bcfd679e39efefe4ebf45af190ad2d/config.json HTTP/1.1" 200 0
+2025-08-18 15:08:16,587 [DEBUG] https://huggingface.co:443 "HEAD /sentence-transformers/paraphrase-multilingual-mpnet-base-v2/resolve/main/tokenizer_config.json HTTP/1.1" 307 0
+2025-08-18 15:08:16,594 [DEBUG] https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-mpnet-base-v2/84fccfe766bcfd679e39efefe4ebf45af190ad2d/tokenizer_config.json HTTP/1.1" 200 0
+2025-08-18 15:08:16,725 [DEBUG] https://huggingface.co:443 "GET /api/models/sentence-transformers/paraphrase-multilingual-mpnet-base-v2/tree/main/additional_chat_templates?recursive=False&expand=False HTTP/1.1" 404 64
+2025-08-18 15:08:17,971 [DEBUG] https://huggingface.co:443 "HEAD /sentence-transformers/paraphrase-multilingual-mpnet-base-v2/resolve/main/1_Pooling/config.json HTTP/1.1" 307 0
+2025-08-18 15:08:17,983 [DEBUG] https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-mpnet-base-v2/84fccfe766bcfd679e39efefe4ebf45af190ad2d/1_Pooling%2Fconfig.json HTTP/1.1" 200 0
+2025-08-18 15:08:18,174 [DEBUG] https://huggingface.co:443 "GET /api/models/sentence-transformers/paraphrase-multilingual-mpnet-base-v2 HTTP/1.1" 200 6343
+2025-08-18 15:08:18,186 [DEBUG] Starting new HTTPS connection (1): mermaid.ink:443
+2025-08-18 15:08:18,246 [DEBUG] https://mermaid.ink:443 "GET /img/LS0tCmNvbmZpZzoKICBmbG93Y2hhcnQ6CiAgICBjdXJ2ZTogbGluZWFyCi0tLQpncmFwaCBURDsKCV9fc3RhcnRfXyhbPHA+X19zdGFydF9fPC9wPl0pOjo6Zmlyc3QKCWFyeGl2X3NlYXJjaGVyKGFyeGl2X3NlYXJjaGVyKQoJd3JpdGVyX25vZGUod3JpdGVyX25vZGUpCglwcmVwcm9jZXNzaW5nX25vZGUocHJlcHJvY2Vzc2luZ19ub2RlKQoJa2V5d29yZF9ub2RlKGtleXdvcmRfbm9kZSkKCV9fZW5kX18oWzxwPl9fZW5kX188L3A+XSk6OjpsYXN0CglfX3N0YXJ0X18gLS0+IGFyeGl2X3NlYXJjaGVyOwoJYXJ4aXZfc2VhcmNoZXIgLS0+IHByZXByb2Nlc3Npbmdfbm9kZTsKCWtleXdvcmRfbm9kZSAtLT4gd3JpdGVyX25vZGU7CglwcmVwcm9jZXNzaW5nX25vZGUgLS0+IGtleXdvcmRfbm9kZTsKCXdyaXRlcl9ub2RlIC0tPiBfX2VuZF9fOwoJY2xhc3NEZWYgZGVmYXVsdCBmaWxsOiNmMmYwZmYsbGluZS1oZWlnaHQ6MS4yCgljbGFzc0RlZiBmaXJzdCBmaWxsLW9wYWNpdHk6MAoJY2xhc3NEZWYgbGFzdCBmaWxsOiNiZmI2ZmMK?type=png&bgColor=!white HTTP/1.1" 200 14784
+2025-08-18 15:08:18,255 [INFO] Salvata immagine del grafo in graph.png
+2025-08-18 15:08:18,259 [DEBUG] Starting new HTTP connection (1): export.arxiv.org:80
+2025-08-18 15:08:18,310 [DEBUG] http://export.arxiv.org:80 "GET /api/query?search_query=all%3ALLM&max_results=1&sortBy=submittedDate&sortOrder=descending HTTP/1.1" 301 0
+2025-08-18 15:08:18,313 [DEBUG] Starting new HTTPS connection (1): export.arxiv.org:443
+2025-08-18 15:08:18,344 [DEBUG] https://export.arxiv.org:443 "GET /api/query?search_query=all%3ALLM&max_results=1&sortBy=submittedDate&sortOrder=descending HTTP/1.1" 200 1421
+2025-08-18 15:08:18,469 [DEBUG] https://us.i.posthog.com:443 "POST /batch/ HTTP/1.1" 200 15
+2025-08-18 15:08:19,615 [DEBUG] https://us.i.posthog.com:443 "POST /batch/ HTTP/1.1" 200 15
+2025-08-18 15:08:19,643 [WARNING] Errore nello stato per query = LLM : []
+2025-08-18 15:08:20,118 [DEBUG] Starting new HTTP connection (1): localhost:3000
+2025-08-18 15:08:20,156 [DEBUG] http://localhost:3000 "POST /api/public/otel/v1/traces HTTP/1.1" 200 440

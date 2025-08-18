@@ -31,5 +31,5 @@ class State(BaseModel):
     selected_chunks: Optional[List[str]] = Field(default=None, description="chunks rilevanti tra i vari papers")
 
     store_research: bool = Field(default=True, description="scegli se salvare la ricerca per analisi future")
-    error_status: Optional[str] = Field(default=None, description="Errori riscontrati (if any)")
+    error_status: Optional[List[str]] = Field(default=[], description="Errori riscontrati (if any)")
     

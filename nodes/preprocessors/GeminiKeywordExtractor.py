@@ -66,6 +66,6 @@ class GeminiKeywordExtractor():
             for article in state.articles:
                 article.keywords = self.annotate(article.abstract)
         except:
-            state.error_status="[KeywordExtractor] error in annotate keywords"
+            state.error_status.append("[KeywordExtractor] error in annotate keywords")
 
         return state

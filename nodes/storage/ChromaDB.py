@@ -111,7 +111,7 @@ class ChromaDB:
         articles_to_process = state.articles
         if not articles_to_process:
             print("⚠️ Nessun articolo da salvare nello stato. Operazione saltata.")
-            state.error_status = "Nessun articolo da salvare nello stato."
+            state.error_status.append("Nessun articolo da salvare nello stato.")
             return state
 
         for doc_model in articles_to_process:
