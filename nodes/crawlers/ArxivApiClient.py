@@ -1,7 +1,8 @@
 import requests
 import xml.etree.ElementTree as ET
 
-from states.ArxivState import State
+from states.ArxivState import State, ArticleMetadata
+
 
 # Definizione dei namespaces per il parsing XML
 # L'API di arXiv usa diversi namespace che sono essenziali per trovare i tag corretti
@@ -32,7 +33,7 @@ class ArxivApiClient:
         
         # I parametri di ricerca dell'API
         params = {
-            'search_query': f"all:{state['query_string']}",  # Ricerca in tutti i campi
+            'search_query': f"all:{state.query_string}",  # Ricerca in tutti i campi
             'max_results': self.max_results,
             'sortBy': self.sort_by,
             'sortOrder': self.sort_order
@@ -61,6 +62,7 @@ class ArxivApiClient:
                 'abstract': entry.find('atom:summary', namespaces).text.strip().replace('\n', ' '),
                 'authors': [author.find('atom:name', namespaces).text for author in entry.findall('atom:author', namespaces)]
             }
-            state['articles'].append(article)
+            article = ArticleMetadata(**article)
+            state.articles.append(article)
             
         return state

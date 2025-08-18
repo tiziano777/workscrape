@@ -26,9 +26,7 @@ class ArxivPreprocessor:
             str: Il testo pulito e normalizzato.
         """
         # Normalizza i caratteri con accenti con NFD (Forma di Normalizzazione di Decomposizione)
-        text = unicodedata.normalize('NFD', text)
-        # Rimuove tutti i caratteri diacritici (gli accenti)
-        text = text.encode('ascii', 'ignore').decode('utf-8')
+        text = unicodedata.normalize('NFD', text).encode('ascii', 'ignore').decode('utf-8')
         
         # Converte il testo in minuscolo
         text = text.lower()

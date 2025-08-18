@@ -3,8 +3,12 @@ from pipelines.ArxivAbstractScraperPipeline import run_pipeline
 import asyncio
 import yaml
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 async def main():
+
+    ### QUERY SEARCH STRING ###
     query_string = "LLM"
 
     MODEL_CONFIG = "./config/gemini2.0-flash.yml"
@@ -23,7 +27,8 @@ async def main():
     with open(PROMPTS_PATH, "r", encoding="utf-8") as f:
         prompts = yaml.safe_load(f)
 
-    run_pipeline(query_string, geminiConfig= llmConfig, dbConfig= dbConfig, prompts= prompts)
+    result = run_pipeline(query_string, geminiConfig=llmConfig, dbConfig=dbConfig, prompts=prompts)
+    print(result)
     
     
 

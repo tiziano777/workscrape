@@ -11,7 +11,6 @@ class GeminiKeywordExtractor():
         Definisci il modello e impostazioni specifiche.
 
         :param llm: Modello gemini 
-        :param input_context: Dimensione massima user input.
         :param system_prompt: Prompt di sistema da utilizzare per l'annotazione.
         """
         self.llm = llm
@@ -30,7 +29,7 @@ class GeminiKeywordExtractor():
         """
         
         try:
-            call=self.error_handler.gemini_invoke_with_retry(llm=self.llm, prompt=str(self.prompt + text + self.end_prompt))
+            call=self.error_handler.gemini_invoke_with_retry(llm=self.llm, prompt=str(self.system_prompt + text + self.end_prompt))
             keywords=self.extract_json(call.content)
 
 
@@ -44,9 +43,8 @@ class GeminiKeywordExtractor():
         Ripara e deserializza l'output JSON generato da LLM. Restituisce una lista oppure {} in caso di errore.
         """
         try:
-            print("json text: ", json_text)
+            #print("json text: ", json_text)
             repaired_text = repair_json(json_text)
-            
             parsed_json = json.loads(repaired_text)
 
             if not isinstance(parsed_json, list):
@@ -65,9 +63,9 @@ class GeminiKeywordExtractor():
         :return: Un dizionario Python con l'output JSON.
         """
         try:
-            for article in state['articles']:
-                article['keywords'] = self.annotate(state)
+            for article in state.articles:
+                article.keywords = self.annotate(article.abstract)
         except:
-            state['error_status']="[KeywordExtractor] error in annotate keywords"
+            state.error_status="[KeywordExtractor] error in annotate keywords"
 
         return state

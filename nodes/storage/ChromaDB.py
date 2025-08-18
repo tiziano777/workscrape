@@ -68,8 +68,8 @@ class ChromaDB:
             Optional[str]: L'ID del documento salvato, o None se non è stato salvato.
         """
 
-        doc_id = doc.get('id')
-        abstract = doc.get('abstract')
+        doc_id = doc.id
+        abstract = doc.abstract
 
         if not doc_id or not abstract:
             print("⚠️ Documento non valido: mancano 'id' o 'abstract'.")
@@ -81,8 +81,9 @@ class ChromaDB:
 
         try:
             # Prepara il documento per ChromaDB.
-            metadata = {k: v for k, v in doc.items() if k != 'abstract' and k != 'id'}
-            metadata['query_string']=query
+            doc_dict = doc.model_dump()
+            metadata = {k: v for k, v in doc_dict.items() if k != 'abstract' and k != 'id'}
+            metadata['query_string'] = query
             
             # Converte le liste in stringhe JSON per la compatibilità con i metadati di ChromaDB
             for key, value in metadata.items():
@@ -106,11 +107,11 @@ class ChromaDB:
         Metodo che funge da nodo per LangGraph. 
         Salva gli articoli dallo stato nel database vettoriale.
         """
-        query = state['query_string']
-        articles_to_process = state['articles']
+        query = state.query_string
+        articles_to_process = state.articles
         if not articles_to_process:
             print("⚠️ Nessun articolo da salvare nello stato. Operazione saltata.")
-            state['error_status'] = "Nessun articolo da salvare nello stato."
+            state.error_status = "Nessun articolo da salvare nello stato."
             return state
 
         for doc_model in articles_to_process:
