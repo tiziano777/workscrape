@@ -11,5 +11,4 @@ beautifulsoup4
 langchain
 
 
-
 ## DOCS: https://docs.crawl4ai.com/api/parameters/
