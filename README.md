@@ -9,18 +9,19 @@ This project implements two core agents to automate the process of collecting an
 **Second-Level Agent** ( ArxivPaperExtractorPipeline ): This agent accepts a list of selected arXiv paper URLs as input. It crawls each paper to extract its content, intelligently breaking it down into logical chunks. This process preserves the original formatting, including LaTeX and HTML tags, to ensure no key information from formulas or sections is lost during the ingestion process. The final output is a structured dictionary for each paper, ready for ingestion into a vector store.
 
 ## ⚙️ Key Technologies
-### **Langgraph**: The core framework for building the agentic workflows.
+**Langgraph**: The core framework for building the agentic workflows.
 
-### **LangChain**: Used for additional functionalities, such as interacting with language models and other tools.
+**LangChain**: Used for additional functionalities, such as interacting with language models and other tools.
 
-### **Langfuse**: Provides observability and debugging capabilities for the Langgraph pipelines, allowing you to trace every step of the agent's execution.
+**Langfuse**: Provides observability and debugging capabilities for the Langgraph pipelines, allowing you to trace every step of the agent's execution.
 
-### **ChromaDB**: An open-source vector database used for storing and querying the processed paper chunks.
+**ChromaDB**: An open-source vector database used for storing and querying the processed paper chunks.
 
-### **Pydantic**: Used for defining robust data schemas, ensuring data consistency across the different states and nodes of the pipeline.
+**Pydantic**: Used for defining robust data schemas, ensuring data consistency across the different states and nodes of the pipeline.
 
 ## 📂 Code Structure
-.continue/                       # Code assistant folder
+
+```bash
 docs/                            # Documentation files (links, full text)
     langgraph-llms.txt
     langgraph-llms-full.text
@@ -41,6 +42,7 @@ requirements.txt                 # Project dependencies
 .env.template                    # Template for the .env file
 README.md                        # This file
 PLANNING.md                      # Project planning overview
+```
 
 ## 🛠️ Setup and Installation
 1. Prerequisites
