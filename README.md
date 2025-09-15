@@ -22,6 +22,8 @@ This project implements two core agents to automate the process of collecting an
 ## 📂 Code Structure
 
 ```bash
+.venv/                           # (ignored) virtualenv, reccomended to create a virtualenv for our agent
+chroma_db/                       # (ignored) chromaDB database, used for store vectors
 docs/                            # Documentation files (links, full text)
     langgraph-llms.txt
     langgraph-llms-full.text
@@ -30,7 +32,7 @@ config/                          # YAML configuration for prompts, LLM settings,
 images/                          # Architecture diagrams
 crawler_examples/                # Crawl4AI examples
 data/                            # Input/output data, datasets, cache
-log/                             # Execution logs
+log/                             # (ignored)Execution logs
 nodes/                           # Langgraph nodes (Python classes)
 pipelines/                       # Graph definitions (nodes, edges, policies)
 states/                          # Pydantic state definitions
@@ -63,11 +65,15 @@ cp .env.template .env
 ```
 
 4. Install Dependencies
-Install the required Python libraries using pip.
+Create virtualenv and install the required Python libraries using pip.
 
 ```bash
+python -m venv .venv
+source .venv/bin/activate 
 pip install -r requirements.txt
 ```
+
+Or use naive python3 command if your python instruction return system error.
 
 5. Run Langfuse
 Langfuse is crucial for observability. Use Docker Compose to get it running locally.

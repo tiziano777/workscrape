@@ -13,7 +13,7 @@ from states.ArxivState import State
 from nodes.crawlers.ArxivApiClient import ArxivApiClient
 from nodes.preprocessors.GeminiKeywordExtractor import GeminiKeywordExtractor
 from nodes.preprocessors.ArxivPreprocessor import ArxivPreprocessor
-from nodes.storage.ChromaDB import ChromaDB
+from nodes.storage.AbstractChromaDB import AbstractChromaDB as ChromaDB
 
 # Langfuse classes
 from langfuse import Langfuse
@@ -43,12 +43,12 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-def create_pipeline(arxixClient: ArxivApiClient, preprocessor1: ArxivPreprocessor, preprocessor2: GeminiKeywordExtractor, writer: ChromaDB):
+def create_pipeline(arxivClient: ArxivApiClient, preprocessor1: ArxivPreprocessor, preprocessor2: GeminiKeywordExtractor, writer: ChromaDB):
     """
     Crea e compila la pipeline Langgraph.
     """
     workflow = StateGraph(State)
-    workflow.add_node("arxiv_searcher", arxixClient)
+    workflow.add_node("arxiv_searcher", arxivClient)
     workflow.add_node("writer_node", writer)
     workflow.add_node("preprocessing_node", preprocessor1)
     workflow.add_node("keyword_node", preprocessor2)
@@ -65,7 +65,7 @@ def create_pipeline(arxixClient: ArxivApiClient, preprocessor1: ArxivPreprocesso
 
     try:
         graphImage = pipeline.get_graph().draw_mermaid_png()
-        with open("images/gemini_api_llm_ner_pipeline.png", "wb") as f:
+        with open("images/gemini_api_llm_abstract_pipeline.png", "wb") as f:
             f.write(graphImage)
         logger.info("Salvata immagine del grafo in graph.png")
     except Exception as e:
@@ -107,7 +107,7 @@ def run_pipeline(query, geminiConfig, dbConfig, prompts):
 
     try:
         # Invocazione della pipeline con tracciamento Langfuse
-        state = graph.invoke({"query_string": query}, config={"callbacks": [langfuse_handler]})
+        state = graph.invoke({"query": query}, config={"callbacks": [langfuse_handler]})
 
         error_status = state.get('error_status',[])
         if error_status == []:

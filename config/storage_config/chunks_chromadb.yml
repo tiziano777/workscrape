@@ -1,0 +1,2 @@
+db_path: "/home/tiziano/progetti/workscrape/chroma_db"
+db_collection: "arxiv_chunks"

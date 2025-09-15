@@ -6,7 +6,7 @@ import json
 
 from states.ArxivState import State
 
-class ChromaDB:
+class AbstractChromaDB:
     """
     Client per il database vettoriale che gestisce la connessione,
     il controllo di esistenza del documento e il salvataggio degli embeddings

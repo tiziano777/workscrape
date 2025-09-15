@@ -17,7 +17,7 @@ class LLMSchemaExtractor:
     La chiaamta viene effettuata alal pagina target per ottenere html,
     i parametri della request sono passati dalla lettura di un file di configurazione json
     '''
-    def __init__(self, provider: str = "gemini/gemini-2.0-flash-001", schema_file: str = "data/schemas.jsonl", user_agents_file: str = "params/user_agent_params.json", additional_headers_path: str = "params/additional_headers.json" ):
+    def __init__(self, provider: str = "gemini/gemini-2.0-flash-001", schema_file: str = "data/schemas.jsonl", user_agents_file: str = "config/http_params/user_agent_params.json", additional_headers_path: str = "config/http_params/additional_headers.json" ):
         """
         Inizializza l'estrattore di schema.
         :param schema_file: percorso file JSONL dove salvare/leggere schemi.

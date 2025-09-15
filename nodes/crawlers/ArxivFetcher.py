@@ -1,14 +1,8 @@
 from nodes.schema_generators.GeminiSchemaGenerator import LLMSchemaExtractor
-import os
-import json
-import random
-from typing import Optional, Dict
-import requests
-from urllib.parse import urlparse
-from dotenv import load_dotenv
+from states.ArxivPdfContentState import State
+
 from crawl4ai.extraction_strategy import JsonCssExtractionStrategy
-from crawl4ai import LLMConfig
-from crawl4ai import AsyncWebCrawler, BrowserConfig, CrawlerRunConfig, CacheMode
+from crawl4ai import AsyncWebCrawler, CrawlerRunConfig, CacheMode
 from crawl4ai.extraction_strategy import JsonCssExtractionStrategy
 
 
@@ -24,9 +18,10 @@ class ArxivFetcher:
 
         
     
-    async def __call__(self,state):
+    async def __call__(self, state: State) -> State:
 
-        url=state
+        url = state.url
+
         # --- PASSO 1: Genera lo schema (sincrono) ---
         schema_definition = self.schema_extractor(url)
 
@@ -51,5 +46,6 @@ class ArxivFetcher:
             result = await crawler.arun(url, config=config)
         
         # Return a reusult. markdown.raw_markdown correctly
-        
-        return result.markdown.raw_markdown
+        state.markdown = result.markdown.raw_markdown
+
+        return state

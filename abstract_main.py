@@ -9,7 +9,7 @@ load_dotenv()
 async def main():
 
     ### QUERY SEARCH STRING ###
-    query_string = "LLM"
+    query_string = "VLLM"
 
     MODEL_CONFIG = "./config/gemini2.0-flash.yml"
     PROMPTS_PATH = "./config/prompts.yml"
@@ -28,7 +28,6 @@ async def main():
         prompts = yaml.safe_load(f)
 
     result = run_pipeline(query_string, geminiConfig=llmConfig, dbConfig=dbConfig, prompts=prompts)
-    print(result)
     
     
 

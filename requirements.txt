@@ -9,6 +9,8 @@ json_repair
 streamlit
 beautifulsoup4
 langchain
+pydantic
+PyYAML
 
 
 ## DOCS: https://docs.crawl4ai.com/api/parameters/
