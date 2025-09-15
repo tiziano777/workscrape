@@ -107,6 +107,7 @@ class AbstractChromaDB:
         Metodo che funge da nodo per LangGraph. 
         Salva gli articoli dallo stato nel database vettoriale.
         """
+        
         query = state.query_string
         articles_to_process = state.articles
         if not articles_to_process:

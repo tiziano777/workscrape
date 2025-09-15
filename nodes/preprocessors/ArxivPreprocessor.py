@@ -1,7 +1,7 @@
 import re
 import unicodedata
 from typing import List, Dict
-from states.ArxivState import State
+from states.ArxivPdfContentState import State
 
 class ArxivPreprocessor:
     """
@@ -47,14 +47,13 @@ class ArxivPreprocessor:
         Returns:
             List: I documenti puliti.
         """
-        for article in state.articles:
-            if not article.abstract:
-                print(f"⚠️ Articolo '{article.id}' saltato: manca il contenuto.")
-                state.error_status.append(f"⚠️ Articolo '{article.id}' saltato")
-                continue
-
-            article.abstract = self._clean_text(article.abstract)
-            article.title = self._clean_text(article.title)
+        if not state.chunks:
+            state.error_status.append('[ArxivPreprocessor] No chunks to preprocess')
+            return state
+        
+        for key, text in state.chunks.items():
+            text = self._clean_text(text)
+            
             
 
         return state

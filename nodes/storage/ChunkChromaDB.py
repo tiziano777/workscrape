@@ -1,5 +1,6 @@
 import chromadb
 from chromadb.utils import embedding_functions
+import json
 
 from states.ArxivPdfContentState import State
 
@@ -75,21 +76,31 @@ class ChunkChromaDB:
         Returns:
             State: Lo stato aggiornato con eventuali messaggi di errore.
         """
-        if not state.url or not state.summarized_chunks:
-            error_msg = "Il campo 'url' o 'summarized_chunks' è vuoto. Salvataggio saltato."
+        if not state.url or not state.chunks:
+            error_msg = "Il campo 'url' o 'chunks' è vuoto. Salvataggio saltato."
             print(f"⚠️  {error_msg}")
             state.error_status.append(error_msg)
             return state
 
-        for key, summarized_text in state.summarized_chunks.items():
+        for key, text in state.chunks.items():
             try:
                 if self._check_document_exists(state.url, key):
                     print(f"✅ Chunk (url='{state.url}', key='{key}') esiste già. Salvataggio saltato.")
                     continue
                 
+                # Serializza keywords e references come stringa JSON
+                keywords_str = json.dumps(state.keywords) if state.keywords is not None else "[]"
+                references_str = json.dumps(state.references) if state.references is not None else "[]"
+                
                 # Prepara i dati per l'upsert
-                documents = [summarized_text]
-                metadatas = [{"url": state.url, "key": key}]
+                documents = [text]
+                metadatas = [{
+                    "url": state.url,
+                    "key": key,
+                    "abstract": state.abstract_chunk,
+                    "keywords": keywords_str,
+                    "references": references_str
+                }]
                 ids = [f"{state.url}-{key}"] # Crea un ID univoco
                 
                 # Aggiunge (o aggiorna) il chunk nel database

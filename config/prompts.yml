@@ -2,12 +2,6 @@ keyword_prompt: >
   You are an expert at extracting keywords from scientific texts. Analyze the following abstract and return a list in range(4-8) of most relevant keywords and topics. The output must be a JSON list of lowercased strings, return only the list of strings, with no additional text.
   ABSTRACT:
 
-chunk_selector_prompt: >
-  Given a JSON list of string representing sections of a arxiv paper, return a JSON list of str representing a projection of the core, descriptive content. Exclude common non-essential sections such as 'abstract', 'acknowledgements', 'references', and 'appendices'.
-  Also, exclude all sections that appear after the 'references' section. Preserve key descriptive chapters like 'introduction' and all main body sections. Return only the list of strings, with no additional text.
-  SECTION_KEYS:
-
-summarizer_prompt: >
-  Summarize the following arxiv text, reduce the complexity while capturing all fundamental aspects and providing a comprehensive overview of the content.
-  The summary can be used for speed-up R&D initial reasearch phases. Return only the summary text, with no additional information.
-  TEXT:
+reference_prompt: >
+  You are an expert at extracting references from Arxiv scientific texts. Analyze the following content and return a list of all references cited in the text. The output must be a JSON list of strings, return only the list of strings, with no additional text, extracting only Arxiv references.
+  CONTENT:

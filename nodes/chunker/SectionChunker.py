@@ -51,7 +51,7 @@ class SectionChunker:
             content = match[2].strip()
             
             # 1. Estrae il titolo, rimuovendo '##' o '###'
-            title = re.sub(r'^(##\s|###\s)', '', full_title_line).strip()
+            title = re.sub(r'^(##\s|###\s|####\s|#####\s)', '', full_title_line).strip()
             
             # 2. Normalizza il titolo per creare una chiave robusta
             key = self.normalize_title_as_key(title)

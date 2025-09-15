@@ -31,6 +31,20 @@
       "type": "string",
       "description": "Abstract dell'articolo."
     },
+    "keywords": {
+      "type": "array",
+      "description": "Lista di parole chiave associate all'articolo.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "references": {
+      "type": "array",
+      "description": "Lista di riferimenti bibliografici citati nell'articolo.",
+      "items": {
+        "type": "string"
+      }
+    },
     "authors": {
       "type": "array",
       "description": "Lista degli autori dell'articolo.",

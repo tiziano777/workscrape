@@ -10,11 +10,17 @@ from langgraph.graph import START, END, StateGraph
 
 # Nodes,states
 from states.ArxivPdfContentState import State
+
+# Retrive
 from nodes.crawlers.ArxivFetcher import ArxivFetcher
+# Chunk by sections
 from nodes.chunker.SectionChunker import SectionChunker
-from nodes.chunker.ChunkSelector import ChunkSelector
-from nodes.preprocessors.ChunkSummarizer import Summarizer
-from nodes.preprocessors.ArxivChunkPreprocessor import ArxivPreprocessor
+# parallel tasks, keyqwords and references extractions
+from nodes.preprocessors.ArxivReferencesExtractor import ArxivReferencesExtractor
+from nodes.preprocessors.ArxivKeywordsExtractor import ArxivKeywordsExtractor
+# text preprocessing
+from nodes.preprocessors.ArxivPreprocessor import ArxivPreprocessor
+# Vector storage
 from nodes.storage.ChunkChromaDB import ChunkChromaDB as ChromaDB
 
 # Langfuse classes
@@ -45,26 +51,31 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-def create_pipeline(fetcher: ArxivFetcher, chunker: SectionChunker, chunkSelector: ChunkSelector, summarizer: Summarizer, preprocessor: ArxivPreprocessor, writer: ChromaDB):
+def create_pipeline(fetcher: ArxivFetcher, chunker: SectionChunker, keyword: ArxivKeywordsExtractor, references: ArxivReferencesExtractor, preprocessor: ArxivPreprocessor, writer: ChromaDB):
     """
     Crea e compila la pipeline Langgraph.
     """
     workflow = StateGraph(State)
-    workflow.add_node("arxiv_fetcher", fetcher)
-    workflow.add_node("chunker_node", chunker)
-    workflow.add_node("chunk_selector_node", chunkSelector)
-    workflow.add_node("summarizer_node", summarizer)
+    workflow.add_node("arxiv_fetcher_node", fetcher)
+    workflow.add_node("section_chunker_node", chunker)
+    workflow.add_node("keyword_extraction_node", keyword)
+    workflow.add_node("references_extraction_node", references)
     workflow.add_node("preprocessing_node", preprocessor)
     workflow.add_node("writer_node", writer)
     
     
 
     # Definizione del flusso di lavoro (edges)
-    workflow.add_edge(START, "arxiv_fetcher")
-    workflow.add_edge("arxiv_fetcher", "chunker_node")
-    workflow.add_edge("chunker_node", "chunk_selector_node")
-    workflow.add_edge("chunk_selector_node", "summarizer_node")
-    workflow.add_edge("summarizer_node", "preprocessing_node")
+    workflow.add_edge(START, "arxiv_fetcher_node")
+    workflow.add_edge("arxiv_fetcher_node", "section_chunker_node")
+
+    # try to parallelize keywords and references extraction
+    workflow.add_edge("section_chunker_node", "keyword_extraction_node")
+    workflow.add_edge("keyword_extraction_node", "references_extraction_node")
+
+
+    workflow.add_edge("references_extraction_node", "preprocessing_node")
+
     workflow.add_edge("preprocessing_node", "writer_node")
     workflow.add_edge("writer_node", END)
 
@@ -88,8 +99,8 @@ async def run_pipeline(url, geminiConfig, dbConfig, prompts):
 
     db_path = dbConfig['db_path']
     collection_name = dbConfig['db_collection']
-    summarizer_prompt = prompts['summarizer_prompt']
-    selection_prompt = prompts['chunk_selector_prompt']
+    keyword_prompt = prompts['keyword_prompt']
+    reference_prompt = prompts['reference_prompt']
 
     # Inizializza il modello LLM
     geminiLLM = ChatGoogleGenerativeAI(
@@ -104,13 +115,13 @@ async def run_pipeline(url, geminiConfig, dbConfig, prompts):
     # Inizializzazione delle classi dei nodi
     fetcher = ArxivFetcher()
     chunker = SectionChunker()
-    chunkSelector = ChunkSelector(llm=geminiLLM, prompt=selection_prompt)
-    summarizer = Summarizer(llm=geminiLLM, prompt=summarizer_prompt)
+    keyword = ArxivKeywordsExtractor(llm=geminiLLM, keyword_prompt=keyword_prompt)
+    references = ArxivReferencesExtractor(llm=geminiLLM, reference_prompt=reference_prompt)
     preprocessor = ArxivPreprocessor()
     writer = ChromaDB(db_path,collection_name)
     
     # Crea la pipeline
-    graph = create_pipeline(fetcher, chunker, chunkSelector, summarizer, preprocessor, writer)
+    graph = create_pipeline(fetcher, chunker, keyword, references, preprocessor, writer)
 
     ### Langfuse ### 
     # `config={"callbacks": [langfuse_handler]}`
